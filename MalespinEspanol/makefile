@@ -1,24 +1,19 @@
-# Definición de herramientas del toolchain para ARM de 32 bits (formato ELF para Linux)
-AS=arm-linux-gnueabi-as       # Ensamblador
-LD=arm-linux-gnueabi-ld       # Enlazador
-OBJCOPY=arm-linux-gnueabi-objcopy # Utilidad para convertir formatos (no se usa aquí, pero puede ser útil)
+#*************************************************
+# Executable name : MalespinEspanol
+# Authors : Grupo #6
+# Description : Simple makefile for GAS
+#*************************************************
 
-# Archivos fuente, objeto y ejecutable
-SRC=MalespinEspanol.s        # Archivo fuente en ensamblador
-OBJ=MalespinEspanol.o        # Archivo objeto generado
-EXE=MalespinEspanol.elf      # Archivo ejecutable en formato ELF
+name=MalespinEspanol
+ASM=as
 
-# Regla por defecto: compila y enlaza el ejecutable
-all: $(EXE)
+# Program to use as linker
+LINKER=ld
 
-# Regla para compilar el código ensamblador a objeto
-$(OBJ): $(SRC)
-	$(AS) -o $(OBJ) $(SRC)
+# Link executable
+$(name): $(name).o
+	$(LINKER) -o $(name) $(name).o
 
-# Regla para enlazar el archivo objeto y generar el ejecutable
-$(EXE): $(OBJ)
-	$(LD) -o $(EXE) $(OBJ)
-
-# Regla para limpiar los archivos generados durante la compilación
-clean:
-	rm -f *.o *.elf
+# Assemble source code
+$(name).o: $(name).s
+	$(ASM) $(ASM_F) -o $(name).o $(name).s
